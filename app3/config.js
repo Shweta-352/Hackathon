@@ -1,3 +1,5 @@
-module.exports = {
-  secret: 'tv5R4WfjxMjQLdTsWmWcr31ZKuqyZQod',
+const config = {
+  url: 'http://localhost:4000',
 }
+
+export default config

@@ -1,17 +1,17 @@
 import axios from 'axios'
+import config from '../config'
 
-export async function register(firstName, lastName, email, phone, password) {
+export async function register(Name, email, phone, password) {
   // body parameters
   const body = {
-    firstName,
-    lastName,
+    Name,
     email,
     phone,
     password,
   }
 
   // make API call
-  const response = await axios.post(`http://localhost:4000/user/register`, body)
+  const response = await axios.post(`${config.url}/user/register`, body)
 
   // read JSON data (response)
   return response.data
@@ -25,7 +25,7 @@ export async function login(email, password) {
   }
 
   // make API call
-  const response = await axios.post(`http://localhost:4000/user/login`, body)
+  const response = await axios.post(`${config.url}/user/login`, body)
 
   // read JSON data (response)
   return response.data

@@ -5,8 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify'
 
 function Register() {
-    const [firstName, setfirstName] = useState("");
-    const [lastName, setLastName] = useState("");
+    const [Name, setName] = useState("");
+    
     const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phoneNumber, setphoneNumber] = useState("");
@@ -32,7 +32,7 @@ function Register() {
           <div className="input-box mt-3">
             <input
               onChange={(e) => {
-                setfirstName(e.target.value);
+                setName(e.target.value);
               }}
               type="text"
               placeholder="First name"
@@ -41,18 +41,7 @@ function Register() {
             />
             <FaUser className="icon" />
           </div>
-          <div className="input-box mt-3">
-            <input
-              onChange={(e) => {
-                setLastName(e.target.value);
-              }}
-              type="type"
-              placeholder="Last Name"
-              className="form-control"
-              required
-            />
-            <FaUser className="icon" />
-          </div>
+          
           <div className="input-box mt-3">
             <input
               onChange={(e) => {
@@ -96,7 +85,7 @@ function Register() {
           </div>
           <div>
           <button onClick={RegisterUser} type="submit" className="btn btn-success mt-3">
-            Login
+            Register
           </button>
           </div>
         </form>
