@@ -1,0 +1,9 @@
+.nav-item{
+    margin: 10px;
+    background-color: rgb(47, 255, 137);
+    border-radius: 15px;
+    width: 155px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
