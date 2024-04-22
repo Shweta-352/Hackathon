@@ -13,7 +13,7 @@ function Homepage() {
       
       <div className="row">
 
-        <div className="ith yenar content "> content content </div>
+        <div className=""> content content </div>
       </div>
     </div>
   );

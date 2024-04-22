@@ -14,6 +14,9 @@ function Header() {
   const onclickallblog = () => {
     navigate("/AllBlog");
   };
+  const onclickhome = () => {
+    navigate("/Homepage");
+  };
   return (
     <div>
       <div>
@@ -55,7 +58,7 @@ function Header() {
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav">
                 <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" href="#">
+                  <a className="nav-link active" aria-current="page" onClick={onclickhome}>
                     Home
                   </a>
                 </li>

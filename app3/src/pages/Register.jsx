@@ -1,98 +1,132 @@
-import React from "react";
-import { useState } from "react";
-import { FaUser, FaLock,FaPhone} from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
-import { toast } from 'react-toastify'
+import { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { register } from '../services/user'
 
-function Register() {
-    const [Name, setName] = useState("");
-    
-    const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [phoneNumber, setphoneNumber] = useState("");
+function RegisterUser() {
+  // create state members
+  const [Name, setName] = useState('')
+  
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
 
-  const navigate = useNavigate();
+  // get a hook to navigate
+  // - navigate is referring a function which is used for navigation
+  const navigate = useNavigate()
 
-  const RegisterUser = async () => {
-    if(email.length===0){
-        toast.warning('Enter valid email')
-    }
-    else if(password.length===0){
-        toast.warning('Enter password')
+  const onCancel = () => {
+    navigate('/login')
+  }
+
+  const onRegister = async () => {
+    // client side validation
+    if (Name.length === 0) {
+      alert('enter name')
+    } else if (email.length === 0) {
+      alert('enter email')
+    } else if (password.length === 0) {
+      alert('enter password')
+    } else {
+      // make the API call and receive the result
+      const result = await register(Name, email, phone, password)
+      if (result['status'] === 'success') {
+        alert('successfully registered a user')
+        navigate('/LoginPage')
+      } else {
+        alert('Failed to register the user')
+      }
     }
   }
 
   return (
-    <div className="row">
-      
-      <div className="col">
-        <form action="">
-          <h1 className="title mt-5">Register User</h1>
+    <div>
+      <h2 className='page-title'>Register</h2>
 
-          <div className="input-box mt-3">
-            <input
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
-              type="text"
-              placeholder="First name"
-              className="form-control"
-              required
-            />
-            <FaUser className="icon" />
+      <div className='row mt-5'>
+        <div className='col-2'></div>
+
+        <div className='col'>
+          <div className='row'>
+            <div className='col'>
+              <div className='mb-3'>
+                <label htmlFor=''>First Name</label>
+                <input
+                  onChange={(e) => {
+                    setName(e.target.value)
+                  }}
+                  type='text'
+                  className='form-control'
+                />
+              </div>
+            </div>
+
+        
           </div>
-          
-          <div className="input-box mt-3">
-            <input
-              onChange={(e) => {
-                setEmail(e.target.value);
-              }}
-              type="email"
-              placeholder="email ID"
-              className="form-control"
-              required
-            />
-            <FaUser className="icon" />
+
+          <div className='row'>
+            <div className='col'>
+              <div className='mb-3'>
+                <label htmlFor=''>Email</label>
+                <input
+                  onChange={(e) => {
+                    setEmail(e.target.value)
+                  }}
+                  type='email'
+                  className='form-control'
+                />
+              </div>
+            </div>
+
+            <div className='col'>
+              <div className='mb-3'>
+                <label htmlFor=''>Phone Number</label>
+                <input
+                  onChange={(e) => {
+                    setPhone(e.target.value)
+                  }}
+                  type='tel'
+                  className='form-control'
+                />
+              </div>
+            </div>
           </div>
-          <div className="input-box mt-3">
-            <input
-              onChange={(e) => {
-                setphoneNumber(e.target.value);
-              }}
-              type="tel"
-              placeholder="Phone Number"
-              className="form-control"
-              required
-            />
-            <FaPhone className="icon" />
+
+          <div className='row'>
+            <div className='col'>
+              <div className='mb-3'>
+                <label htmlFor=''>Password</label>
+                <input
+                  onChange={(e) => {
+                    setPassword(e.target.value)
+                  }}
+                  type='password'
+                  className='form-control'
+                />
+              </div>
+            </div>
           </div>
-          <div className="input-box mt-3">
-            <input
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
-              type="password"
-              placeholder="password"
-              className="form-control"
-              required
-            />
-            <FaLock className="icon" />
+
+          <div className='row'>
+            <div className='col'>
+              <div className='mb-3'>
+                Already have account ? <Link to='/login'>Login here</Link>
+              </div>
+
+              <button onClick={onRegister} className='btn btn-success'>
+                Register
+              </button>
+              <button onClick={onCancel} className='btn btn-danger ms-2'>
+                Cancel
+              </button>
+            </div>
           </div>
-          <div className="smt mt-3">
-            <h6>
-              Already registered?<Link to="/Loginpage">Login here</Link>
-            </h6>
-          </div>
-          <div>
-          <button onClick={RegisterUser} type="submit" className="btn btn-success mt-3">
-            Register
-          </button>
-          </div>
-        </form>
+        </div>
+
+        <div className='col-2'></div>
       </div>
-      
     </div>
-  );
+  )
 }
 
-export default Register;
+export default RegisterUser
